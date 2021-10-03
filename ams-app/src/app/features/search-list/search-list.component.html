@@ -1,0 +1,70 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Search list</h5>
+
+    <div *ngIf="!(loadingPage$ | async); else spinner">
+      <table class="table table-sm table-hover" *ngIf="searchPage">
+        <thead>
+        <tr>
+          <th scope="col">
+            <a class="link-dark" [routerLink]="" (click)="changeSorting(searchSorting.ID)">ID <i [ngClass]="{
+            'bi-sort-down': direction == 'DESC' && sorting == searchSorting.ID,
+            'bi-sort-up-alt': direction == 'ASC' && sorting == searchSorting.ID}" style="font-size: 15px"></i></a>
+          </th>
+          <th scope="col">
+            <a class="link-dark" [routerLink]="" (click)="changeSorting(searchSorting.CLIENT)">Client name <i [ngClass]="{
+            'bi-sort-down': direction == 'DESC' && sorting == searchSorting.CLIENT,
+            'bi-sort-up-alt': direction == 'ASC' && sorting == searchSorting.CLIENT}" style="font-size: 15px"></i></a>
+          </th>
+          <th scope="col">
+            <a class="link-dark" [routerLink]="" (click)="changeSorting(searchSorting.DATE_RESTRICT)">Date restrict <i [ngClass]="{
+            'bi-sort-down': direction == 'DESC' && sorting == searchSorting.DATE_RESTRICT,
+            'bi-sort-up-alt': direction == 'ASC' && sorting == searchSorting.DATE_RESTRICT}" style="font-size: 15px"></i></a>
+          </th>
+          <th scope="col">
+            <a class="link-dark" [routerLink]="" (click)="changeSorting(searchSorting.RESULT_COUNT)">Result count <i [ngClass]="{
+            'bi-sort-down': direction == 'DESC' && sorting == searchSorting.RESULT_COUNT,
+            'bi-sort-up-alt': direction == 'ASC' && sorting == searchSorting.RESULT_COUNT}" style="font-size: 15px"></i></a>
+          </th>
+          <th scope="col">
+            <a class="link-dark" [routerLink]="" (click)="changeSorting(searchSorting.USER)">Author <i [ngClass]="{
+            'bi-sort-down': direction == 'DESC' && sorting == searchSorting.USER,
+            'bi-sort-up-alt': direction == 'ASC' && sorting == searchSorting.USER}" style="font-size: 15px"></i></a>
+          </th>
+          <th scope="col">
+            <a class="link-dark" [routerLink]="" (click)="changeSorting(searchSorting.CREATED_DATE)">Created date <i [ngClass]="{
+            'bi-sort-down': direction == 'DESC' && sorting == searchSorting.CREATED_DATE,
+            'bi-sort-up-alt': direction == 'ASC' && sorting == searchSorting.CREATED_DATE}" style="font-size: 15px"></i></a>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let search of searchPage.content" [routerLink]="['/searches', search.id]">
+          <td>{{search.id}}</td>
+          <td>{{search.client.name}} {{search.client.type}}
+          <td>{{dateRestricts[search.dateRestrict]}}</td>
+          <td>{{search.resultCount}}</td>
+          <td>{{search.user.firstName}} {{search.user.lastName}}</td>
+          <td>{{search.createdDate | date: 'd MMM y, HH:mm:ss'}}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <app-custom-pagination *ngIf="searchPage.totalElements != 0"
+        [page]="searchPage"
+        (firstPageEvent)="getFirstPage()"
+        (nextPageEvent)="getNextPage()"
+        (previousPageEvent)="getPreviousPage()"
+        (lastPageEvent)="getLastPage()"
+        (specificPageEvent)="getSpecificPage($event)"
+      >
+      </app-custom-pagination>
+
+    </div>
+
+    <ng-template #spinner>
+      <app-loading-spinner></app-loading-spinner>
+    </ng-template>
+
+  </div>
+</div>

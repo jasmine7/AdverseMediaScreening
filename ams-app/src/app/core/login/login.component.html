@@ -1,0 +1,39 @@
+<div class="position-absolute top-50 start-50 translate-middle">
+  <div class="card" style="width: 300px">
+    <div class="card-body">
+      <form [formGroup]="form">
+        <fieldset>
+          <legend>Sign in</legend>
+          <div class="mb-3">
+            <label for="inputUsername" class="form-label visually-hidden">Username</label>
+            <input type="text" class="form-control form-control-sm" id="inputUsername"
+                   placeholder="Username" formControlName="username">
+          </div>
+          <div class="mb-3">
+            <label for="inputPassword" class="form-label visually-hidden">Password</label>
+            <input type="password" class="form-control form-control-sm" id="inputPassword"
+                   placeholder="Password" formControlName="password">
+          </div>
+          <div class="mb-3">
+            <div class="d-grid gap-2">
+              <button type="submit"
+                      class="btn btn-primary btn-sm"
+                      [disabled]="!form.valid || (loggingIn$ | async)"
+                      (click)="login()">
+                <ng-container
+                  *ngIf="loggingIn$ | async; then loggingInButton; else loginButton">
+                </ng-container>
+                <ng-template #loginButton>
+                  Login
+                </ng-template>
+                <ng-template #loggingInButton>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </ng-template>
+              </button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

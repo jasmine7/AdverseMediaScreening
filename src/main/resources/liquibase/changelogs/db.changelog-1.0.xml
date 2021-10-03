@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="svetlana">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="svetlana">
+        <createTable tableName="keywords">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="svetlana">
+        <insert tableName="keywords">
+            <column name="id" value="1"/>
+            <column name="name" value="crime"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="2"/>
+            <column name="name" value="launder"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="3"/>
+            <column name="name" value="terror"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="4"/>
+            <column name="name" value="sanction"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="5"/>
+            <column name="name" value="circumvent"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="6"/>
+            <column name="name" value="embargo"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="7"/>
+            <column name="name" value="penalt"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="8"/>
+            <column name="name" value="tax"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="9"/>
+            <column name="name" value="fraud"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="10"/>
+            <column name="name" value="charge"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="11"/>
+            <column name="name" value="arrest"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="12"/>
+            <column name="name" value="violate"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="13"/>
+            <column name="name" value="drug"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="14"/>
+            <column name="name" value="corrupt"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="15"/>
+            <column name="name" value="bribe"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="16"/>
+            <column name="name" value="scandal"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="17"/>
+            <column name="name" value="breach"/>
+        </insert>
+        <insert tableName="keywords">
+            <column name="id" value="18"/>
+            <column name="name" value="court"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="4" author="svetlana">
+        <createTable tableName="clients">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="registration_number" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="varchar(2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="svetlana">
+        <insert tableName="clients">
+            <column name="id" value="1"/>
+            <column name="name" value="Transact Pro"/>
+            <column name="type" value="SIA"/>
+            <column name="registration_number" value="41503033127"/>
+            <column name="country" value="LV"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="2"/>
+            <column name="name" value="TORMEX"/>
+            <column name="type" value="LIMITED"/>
+            <column name="registration_number" value="1907489"/>
+            <column name="country" value="NZ"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="3"/>
+            <column name="name" value="VALEMONT PROPERTIES"/>
+            <column name="type" value="LTD"/>
+            <column name="registration_number" value="05904200"/>
+            <column name="country" value="GB"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="4"/>
+            <column name="name" value="Seabon"/>
+            <column name="type" value="Limited"/>
+            <column name="registration_number" value="06026625"/>
+            <column name="country" value="GB"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="5"/>
+            <column name="name" value="DIRON TRADE"/>
+            <column name="type" value="LLP"/>
+            <column name="registration_number" value="OC339670"/>
+            <column name="country" value="GB"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="6"/>
+            <column name="name" value="HILUX SERVICES"/>
+            <column name="type" value="LP"/>
+            <column name="registration_number" value="SL012732"/>
+            <column name="country" value="GB"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="7"/>
+            <column name="name" value="MEDIA-INVEST"/>
+            <column name="type" value="OOO"/>
+            <column name="registration_number" value="1077762407580"/>
+            <column name="country" value="RU"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="8"/>
+            <column name="name" value="Quantus Division"/>
+            <column name="type" value="Ltd"/>
+            <column name="registration_number" value="n/a"/>
+            <column name="country" value="IE"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="9"/>
+            <column name="name" value="DINO CAPITAL"/>
+            <column name="type" value="SA"/>
+            <column name="registration_number" value="661053"/>
+            <column name="country" value="PA"/>
+        </insert>
+        <insert tableName="clients">
+            <column name="id" value="10"/>
+            <column name="name" value="Redstone Financial"/>
+            <column name="type" value="Ltd"/>
+            <column name="registration_number" value="n/a"/>
+            <column name="country" value="BZ"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="6" author="svetlana">
+        <createTable tableName="searches">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_restrict" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="result_count" type="INT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="7" author="svetlana">
+        <createTable tableName="search_results">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="search_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(250)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="link" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="snippet" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="8" author="svetlana">
+        <createTable tableName="decisions_history">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="result_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="decision" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="9" author="svetlana">
+        <createTable tableName="searches_keywords">
+            <column name="search_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="keyword_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="10" author="svetlana">
+        <addForeignKeyConstraint baseColumnNames="client_id"
+                                 baseTableName="searches"
+                                 constraintName="fk_client_searches"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="clients"/>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="searches"
+                                 constraintName="fk_user_searches"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+        <addForeignKeyConstraint baseColumnNames="search_id"
+                                 baseTableName="search_results"
+                                 constraintName="fk_search_search_results"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="searches"/>
+        <addForeignKeyConstraint baseColumnNames="search_id"
+                                 baseTableName="searches_keywords"
+                                 constraintName="fk_search_searches_keywords"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="searches"/>
+        <addForeignKeyConstraint baseColumnNames="keyword_id"
+                                 baseTableName="searches_keywords"
+                                 constraintName="fk_keyword_searches_keywords"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="keywords"/>
+        <addForeignKeyConstraint baseColumnNames="result_id"
+                                 baseTableName="decisions_history"
+                                 constraintName="fk_results_decisions"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="search_results"/>
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="decisions_history"
+                                 constraintName="fk_users_decisions"
+                                 onDelete="RESTRICT"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+</databaseChangeLog>

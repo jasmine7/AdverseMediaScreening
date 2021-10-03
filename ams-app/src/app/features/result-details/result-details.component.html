@@ -1,0 +1,83 @@
+<div class="card mb-2">
+  <div class="card-body">
+    <p>Result ID Nr. {{result.id}}</p>
+    <p>{{result.title}}</p>
+    <a href="{{result.link}}" target="_blank">
+      {{(result.link.length > 49)?(result.link | slice:0:49)+"...":result.link}}
+    </a>
+    <p>{{result.snippet}}</p>
+    <form [formGroup]="form">
+
+      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check"
+               name="decision" id="true-button{{result.id}}"
+               autocomplete="off" formControlName="decision" [value]="true">
+        <label class="btn btn-outline-success btn-sm" for="true-button{{result.id}}">True</label>
+        <input type="radio" class="btn-check"
+               name="decision" id="false-button{{result.id}}"
+               autocomplete="off" formControlName="decision" [value]="false">
+        <label class="btn btn-outline-danger btn-sm" for="false-button{{result.id}}">False</label>
+      </div>
+
+      <div *ngIf="result.decision">
+        <ng-container
+          *ngIf="this.changed; then changedDiv; else lastModifiedDiv">
+        </ng-container>
+        <ng-template #lastModifiedDiv>
+          <small class="text-muted">Last modified by
+            {{result.decision.user.firstName}} {{result.decision.user.lastName}}
+            ({{result.decision.date | date: 'd MMM y, HH:mm:ss'}})</small>
+        </ng-template>
+        <ng-template #changedDiv>
+          <small class="text-muted">
+            Decision has been changed
+          </small>
+        </ng-template>
+        <div>
+          <a [routerLink]="" (click)="showHistoryModal()" class="link-secondary">
+            <small>
+              View change history
+            </small>
+          </a>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div *ngIf="showHistory">
+  <div class="modal fade" id="historyModal{{result.id}}" #historyModal tabindex="-1"
+       aria-labelledby="historyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Decision history for search result {{result.id}}</h5>
+        </div>
+        <div class="modal-body">
+          <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Decision</th>
+              <th scope="col">Author</th>
+              <th scope="col">Date</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="decisionHistory">
+            <tr *ngFor="let history of decisionHistory | orderBy: 'date'">
+              <td>{{history.id}}</td>
+              <td>{{history.decision}}</td>
+              <td>{{history.user.firstName}} {{history.user.lastName}}</td>
+              <td>{{history.date | date: 'd MMM y, HH:mm:ss'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeHistoryModal()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+export enum SearchSorting {
+  ID = 'ID',
+  CREATED_DATE = 'CREATED_DATE',
+  USER = 'USER',
+  CLIENT = 'CLIENT',
+  DATE_RESTRICT = 'DATE_RESTRICT',
+  RESULT_COUNT = 'RESULT_COUNT'
+}

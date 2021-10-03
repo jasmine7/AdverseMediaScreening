@@ -1,0 +1,126 @@
+<div class="card">
+
+  <div class="card-body">
+    <h5 class="card-title">New search details</h5>
+    <hr>
+
+    <div *ngIf="!(loadingPage$ | async); else spinner">
+      <form [formGroup]="searchForm">
+        <fieldset>
+
+          <div class="row mb-3">
+            <div class="col-sm-2">
+              Date restrict <span class="text-danger">*</span>
+            </div>
+            <div class="col-sm-10">
+              <div class="form-check form-check-inline"
+                   *ngFor="let dateRestrict of enumKeys(dateRestricts)">
+                <input class="form-check-input"
+                       type="radio"
+                       name="dateRestrict"
+                       id="{{dateRestrict}}"
+                       value="{{dateRestrict}}" formControlName="dateRestrict">
+                <label class="form-check-label" for="{{dateRestrict}}">
+                  {{dateRestricts[dateRestrict]}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="row mb-3">
+            <div class="col-sm-2">
+              Keywords <span class="text-danger">*</span>
+            </div>
+            <div class="col-sm-10">
+              <div class="form-check form-check-inline col-3" *ngFor="let keyword of keywords">
+                <input class="form-check-input col"
+                       type="checkbox"
+                       value="{{keyword.id}}"
+                       id="{{keyword.id}}"
+                       (change)="onKeywordCheckboxChange($event)">
+                <label class="form-check-label" for="{{keyword.id}}">
+                  {{keyword.name}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="row mb-3">
+            <div class="col-sm-2">
+              Client <span class="text-danger">*</span>
+            </div>
+            <div class="col-sm-10">
+              <app-client-search (selectedClientEvent)="getSelectedClient($event)"></app-client-search>
+              <div class="form-check mt-3" *ngIf="showClient">
+                <input class="form-check-input" type="radio" name="clientRadio" id="clientRadio" checked>
+                <label class="form-check-label" for="clientRadio">
+                  {{searchForm.controls.client.value.name}} {{searchForm.controls.client.value.type}}
+                  (Reg.Nr. {{searchForm.controls.client.value.registrationNumber}}, country {{searchForm.controls.client.value.country}})
+                </label>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <div class="justify-content-end">
+            <button type="button"
+                    class="btn btn-primary"
+                    [disabled]="!searchForm.valid || (searching$ | async)"
+                    (click)="doSearch()">
+              <ng-container
+                *ngIf="searching$ | async; then searchingButton; else doSearchButton">
+              </ng-container>
+              <ng-template #doSearchButton>
+                Do search
+              </ng-template>
+              <ng-template #searchingButton>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Searching...
+              </ng-template>
+            </button>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+
+    <ng-template #spinner>
+      <app-loading-spinner></app-loading-spinner>
+    </ng-template>
+
+  </div>
+
+</div>
+
+<div *ngIf="showResultModal">
+  <div class="modal fade" id="resultModal" #resultModal
+       tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" *ngIf="search; else errorModal">
+        <div class="modal-header">
+          <h5 class="modal-title">Search Nr. {{search.id}}</h5>
+        </div>
+        <div class="modal-body">
+          <p>Result count: {{search.resultCount}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary me-2"
+                  data-bs-dismiss="modal" (click)="searchAgain()">Try again</button>
+          <button type="button" class="btn btn-primary me-2"
+                  data-bs-dismiss="modal" [routerLink]="['/searches', search.id]">See search details</button>
+        </div>
+      </div>
+      <ng-template #errorModal>
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>Oops, something went wrong.</p>
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal" (click)="searchAgain()">Close</button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

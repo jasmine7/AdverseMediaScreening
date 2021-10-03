@@ -1,0 +1,31 @@
+<div *ngIf="toastList.length">
+<!--  <div class="toast-container position-absolute top-0 end-0 p-3">-->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div *ngFor="let toast of toastList | reverse">
+      <div #toastDiv class="toast show align-items-center text-white border-0"
+           role="alert" aria-live="assertive"
+           aria-atomic="true" data-bs-autohide="false"
+           [ngClass]="{'bg-danger': toast.toastType == toastType.DANGER,
+                       'bg-success': toast.toastType == toastType.SUCCESS,
+                       'bg-warning': toast.toastType == toastType.WARNING,
+                       'bg-info': toast.toastType == toastType.INFO}">
+        <div class="d-flex">
+          <div class="ms-2 m-auto">
+            <i class="align-middle lh-1"
+               style="font-size: 25px"
+               [ngClass]="{'bi-x-circle': toast.toastType == toastType.DANGER,
+                           'bi-check-circle': toast.toastType == toastType.SUCCESS,
+                           'bi-exclamation-triangle': toast.toastType == toastType.WARNING,
+                           'bi-info-circle': toast.toastType == toastType.INFO}"></i>
+          </div>
+          <div class="toast-body text-break">
+            {{toast.message}}
+          </div>
+          <button type="button" class="btn-close btn-close-white m-2"
+                  data-bs-dismiss="toast" aria-label="Close"
+                  (click)="removeToast(toast)"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
